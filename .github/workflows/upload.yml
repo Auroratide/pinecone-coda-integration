@@ -26,6 +26,6 @@ jobs:
           set -euo pipefail
           TAG="${{ github.event.release.tag_name }}"
           VERSION="${TAG#v}"
-          npx coda register --apiToken ${{ secrets.CODA_API_TOKEN }}
+          npx coda register ${{ secrets.CODA_API_TOKEN }}
           npx coda upload pack.ts "$VERSION" --apiToken ${{ secrets.CODA_API_TOKEN }}
           npx coda release pack.ts "$VERSION" --notes "$TAG" --apiToken ${{ secrets.CODA_API_TOKEN }}
