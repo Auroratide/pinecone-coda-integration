@@ -1,6 +1,6 @@
-# Pinecode + Coda
+# Pinecone + Coda
 
-This is a [Coda Pack](https://coda.io/product/packs) that lets you integrate with a [Pinecode Vector Store](https://www.pinecone.io/). Put in more eloquent terms, this lets you do some mild AI shenanigans on data, within Coda.
+This is a [Coda Pack](https://coda.io/product/packs) that lets you integrate with a [Pinecone Vector Store](https://www.pinecone.io/). Put in more eloquent terms, this lets you do some mild AI shenanigans on data, within Coda.
 
 > [!CAUTION]
 > Please do not use this yet, it's still in development. Unless you're an adrenaline junkie, then you can do whatever you want.
