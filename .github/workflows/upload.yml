@@ -20,12 +20,12 @@ jobs:
           node-version: lts/*
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
-      - name: Upload Coda Pack
-        uses: siriusnottin/upload-coda-pack@v1.0.0
-        with:
-          codaApiToken: ${{ secrets.CODA_API_TOKEN }}
-      - name: Release Coda Pack
-        uses: siriusnottin/release-coda-pack@main
-        with:
-          codaApiToken: ${{ secrets.CODA_API_TOKEN }}
-          notes: ${{ github.event.release.body || github.event.release.tag_name || 'Automated release' }}
+      - name: Upload and Release Coda Pack
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="${{ github.event.release.tag_name }}"
+          VERSION="${TAG#v}"
+          npx coda register --apiToken ${{ secrets.CODA_API_TOKEN }}
+          npx coda upload pack.ts "$VERSION" --apiToken ${{ secrets.CODA_API_TOKEN }}
+          npx coda release pack.ts "$VERSION" --notes "$TAG" --apiToken ${{ secrets.CODA_API_TOKEN }}
