@@ -26,4 +26,26 @@ pnpm coda execute pack.ts FormulaName "param1" "param2" ...
 
 ## Deployment
 
-New versions of the pack are uploaded to Coda whenever a Release of the project is created on Github. This is done through a Workflow.
+New versions are released in two steps: create a GitHub Release locally, then the CI uploads that version to Coda.
+
+1) One-time setup
+
+- Ensure a GitHub Actions secret `CODA_API_TOKEN` exists (Coda API token).
+- Install and log in to the GitHub CLI: `gh auth login`.
+
+2) Cut a release
+
+```
+./scripts/release.sh 0.9
+```
+
+What this does:
+
+- Overwrites `pack/version.ts` with `0.9` and commits it.
+- Creates and pushes the tag `v0.9`.
+- Creates the GitHub Release `v0.9` with generated notes.
+
+3) CI upload to Coda
+
+- The `Upload Coda Pack` workflow runs on the published release.
+- It registers with Coda using `CODA_API_TOKEN`, uploads the Pack, and releases version `0.9` with the tag used as notes.
